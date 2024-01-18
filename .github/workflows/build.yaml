@@ -20,10 +20,11 @@ jobs:
         run: git clone --depth=1 ${{ steps.get-project.outputs.PROJECT }} project
       - name: Build the app
         working-directory: ./project
+        # ./gradlew assembleDebug --stacktrace
         run: |
           if [ ! -f "gradlew" ]; then gradle wrapper; fi
           chmod +x gradlew
-          ./gradlew assembleDebug --stacktrace
+          ./gradlew assembleRelease --stacktrace
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
